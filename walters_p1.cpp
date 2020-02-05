@@ -7,14 +7,14 @@
 #include <iostream>
 using namespace std;
 int main(int argc, char const *argv[]) {
-    if(argc!=3){
+    /*if(argc!=3){
       cout << "error with command line arguments" << endl;
       return -1;
-    }
+    }*/
     bool DDEBUG = false;
     vector<int> acceptstates;
     int startstate;
-    vector<vector<pair<char,int>>> transitions(1000);
+    vector<vector<pair<char,int>>> transitions(1001);
     ifstream infile(argv[1]);
     string s;
     while(getline(infile,s)){
@@ -139,7 +139,7 @@ int main(int argc, char const *argv[]) {
         }
       }
       for(auto it = accepts.begin() ; it != accepts.end() ; it++){
-        cout <<"  " << (*it)  ;
+        cout <<" " << (*it)  ;
       }
       cout << endl;
     }
@@ -152,7 +152,7 @@ int main(int argc, char const *argv[]) {
       }
       cout << "accept";
       for(auto it = accepts.begin() ; it != accepts.end() ; it++){
-        cout <<"  " << (*it)  ;
+        cout <<" " << (*it)  ;
       }
       cout << endl;
     }
