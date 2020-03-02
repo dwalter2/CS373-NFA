@@ -11,15 +11,19 @@ int main(int argc, char const *argv[]) {
       cout << "error with command line arguments" << endl;
       return -1;
     }*/
-    bool DDEBUG = false;
+    bool DDEBUG = true;
     vector<int> acceptstates;
     int startstate;
     vector<vector<pair<char,int>>> transitions(1001);
     ifstream infile(argv[1]);
     string s;
+    int i = 0;
     while(getline(infile,s)){
+      cout << "iteration : " << i++ << endl;
+
       size_t found = s.find("state");
       if(found != string::npos){
+        //cout << "here" << endl;
         string num = "";
         for(int i = 5 ; i < s.length() ; i++){
           if (s[i]==' '){
@@ -34,18 +38,20 @@ int main(int argc, char const *argv[]) {
         int x = stoi(num);
         size_t found1 = s.find("start");
         if(found1 != string::npos){
+          //cout << "here" << endl;
           startstate = x;
         }
         size_t found2 = s.find("accept");
         if(found2 != string::npos){
+          //cout << "here 2" << endl;
           acceptstates.push_back(x);
         }
       }
       else{
         string firstnum ="";
-        int lastpos;
+        int lastpos = 10;
         for(int i = 10 ; i < s.length() ; i++ ){
-          if (s[i]==' '){
+          if (s[i]=='\t'){
             if (firstnum!=""){
               lastpos = i;
               break;
@@ -56,21 +62,28 @@ int main(int argc, char const *argv[]) {
           }
         }
         int beginstate = stoi(firstnum);
-        char trans = 0;
+        //cout << "begin state: " << beginstate << endl;
+        char trans ='\0';
         for(int i = lastpos ; i < s.length()  ;i++){
-          if (s[i]==' '){
-            if (trans!=0){
+          cout << "s[i] " << s[i] << endl;
+          if (s[i]=='\t'){
+            //cout << "in first if" << endl;
+            if (trans!='\0'){
+              //cout << "now breaking" << endl;
               lastpos = i;
               break;
             }
           }
           else{
+            //cout << "adding to string " << endl;
             trans=s[i];
           }
         }
+        //cout << "last position: " << lastpos << endl;
+        //cout << "transition : " << trans << endl;
         string secondnum = "";
         for(int i = lastpos ; i < s.length() ; i++){
-          if (s[i]==' '){
+          if (s[i]=='\t'){
             if (secondnum!=""){
               break;
             }
@@ -80,6 +93,7 @@ int main(int argc, char const *argv[]) {
           }
         }
         int endstate = stoi(secondnum);
+        //cout << "endstate : " << endstate << endl;
         //if(DDEBUG) cout << "begin state : " << beginstate << " transition : " << trans << " ending state: " << endstate << endl;
         pair <char, int> p;
         p = make_pair (trans, endstate);
