@@ -11,15 +11,13 @@ int main(int argc, char const *argv[]) {
       cout << "error with command line arguments" << endl;
       return -1;
     }*/
-    bool DDEBUG = true;
+    bool DDEBUG = false;
     vector<int> acceptstates;
     int startstate;
     vector<vector<pair<char,int>>> transitions(1001);
     ifstream infile(argv[1]);
     string s;
-    int i = 0;
     while(getline(infile,s)){
-      cout << "iteration : " << i++ << endl;
 
       size_t found = s.find("state");
       if(found != string::npos){
@@ -65,7 +63,6 @@ int main(int argc, char const *argv[]) {
         //cout << "begin state: " << beginstate << endl;
         char trans ='\0';
         for(int i = lastpos ; i < s.length()  ;i++){
-          cout << "s[i] " << s[i] << endl;
           if (s[i]=='\t'){
             //cout << "in first if" << endl;
             if (trans!='\0'){
