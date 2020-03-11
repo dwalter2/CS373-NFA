@@ -24,7 +24,7 @@ int main(int argc, char const *argv[]) {
         //cout << "here" << endl;
         string num = "";
         for(int i = 5 ; i < s.length() ; i++){
-          if (s[i]==' '){
+          if (s[i]=='\t'){
             if (num!=""){
               break;
             }
